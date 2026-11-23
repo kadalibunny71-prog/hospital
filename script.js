@@ -1,0 +1,6 @@
+const menu=document.getElementById("menu"),nav=document.getElementById("nav");
+menu.addEventListener("click",()=>{const open=nav.classList.toggle("open");menu.textContent=open?"✕":"☰";menu.setAttribute("aria-expanded",String(open));});
+nav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{nav.classList.remove("open");menu.textContent="☰";menu.setAttribute("aria-expanded","false");}));
+const date=document.getElementById("date"),now=new Date(),today=new Date(now.getTime()-now.getTimezoneOffset()*60000).toISOString().slice(0,10);date.min=today;
+document.getElementById("form").addEventListener("submit",e=>{e.preventDefault();const f=e.currentTarget;if(!f.checkValidity()){f.reportValidity();return;}const name=new FormData(f).get("name").trim().split(/\\s+/)[0];document.getElementById("message").textContent=`Thank you, ${name}. This demo request was validated, but no appointment was sent or booked. Contact the hospital directly to arrange care.`;f.reset();date.min=today;});
+document.getElementById("year").textContent=new Date().getFullYear();
